@@ -1,7 +1,5 @@
-import numpy as np
 import seaborn as sns
 from matplotlib import pyplot as plt
-from pandas.plotting import plot_params
 from scipy.io import arff
 import pandas as pd
 # data enrypted trafic with 14 labels
@@ -19,7 +17,6 @@ df = pd.DataFrame(data)
 #idle - The amount of time a flow was idle before becoming active
 #fb_psec - Flow Bytes per second
 #fp_psec - Flow packets per second
-
 features = meta.names()
 
 # print(features)
@@ -31,16 +28,33 @@ duration_stats=duration.describe()
 print(f"Mediana: {duration_stats['mean']}")  # Mediana
 print(f"IQR: {duration_stats['75%']-duration_stats['25%']}")  # rozstęp między kwantylowy
 print(f"Standard deviation: {duration_stats["std"]}")
-plt.figure(figsize=(10, 5))
-sns.kdeplot(duration)
-plt.title("Rozkład gęstości długości ruchu") # nie wiem do końca jak to nazwać, wyrysowałem ilości próbek w zależności ich długości
-plt.xlabel("Długość")
-plt.ylabel("Ilość próbek ? ")
-plt.show()
-for feature in features[:-1]:
-    correlation = duration.corr(df[feature])
-    print(f"Korelacja między duration a {feature}: {correlation:.2f}")
+# plt.figure(figsize=(10, 5))
+# sns.kdeplot(duration)
+# plt.title("Rozkład gęstości długości ruchu") # nie wiem do końca jak to nazwać, wyrysowałem ilości próbek w zależności ich długości
+# plt.xlabel("Długość")
+# plt.ylabel("Ilość próbek ? ")
+# plt.show()
 
-plt.figure(figsize=(10, 5))
-plt.plot(duration, df["max_flowiat"])
+
+# for feature in features[:-1]:
+#     correlation = duration.corr(df[feature])
+#     print(f"Korelacja między duration a {feature}: {correlation:.2f}")
+#
+# plt.figure(figsize=(10, 5))
+# plt.plot(duration, df["max_flowiat"])
+# plt.show()
+
+# corr for all
+# for feature in features[:-1]:
+#     for feature2 in features[:-1]:
+#         correlation = df[feature2].corr(df[feature])
+#         if feature!= feature2 and correlation > 0.9:
+#             print(f"Korelacja między {feature} a {feature2}: {correlation:.2f}")
+dfstripped = df.iloc[:, :-1] # .iloc[wiersz, kolumna]
+corrmatrix=dfstripped.corr()
+plt.figure(figsize=(12, 8))
+sns.heatmap(corrmatrix, annot=False, cmap="coolwarm", center=0, linewidths=0.5, vmin=-1, vmax=1)
+
+plt.title("Mapa korelacji cech")
 plt.show()
+
