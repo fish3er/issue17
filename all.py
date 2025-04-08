@@ -1,9 +1,10 @@
+from matplotlib import pyplot as plt
 from scapy.all import rdpcap
 from scapy.layers.inet import TCP, UDP
 from scapy.layers.dns import DNS
 from scapy.layers.ntp import NTP
 from collections import defaultdict
-plik="facebookchat3.pcapng"
+plik="aim_chat_3a.pcap"
 packets = rdpcap("NonVPN-PCAPs-01/"+plik)
 
 layer_counts = defaultdict(int)
@@ -71,13 +72,17 @@ lists_to_analyze = [
     ("UDP LEN", all_len_udp)  # Dodane poprawnie do analizy
 ]
 
-print (f"\n=== Pola ===")
-# Analiza i wyświetlanie wyników
-for name, data in lists_to_analyze:
-    avg, max_val, min_val = analize_list(data)
-    print(f"{name}:")
-    print(f"Średnia: {avg:.2f}")
-    print(f"Max: {max_val}")
-    print(f"Min: {min_val}\n")
+# print (f"\n=== Pola ===")
+# # Analiza i wyświetlanie wyników
+# for name, data in lists_to_analyze:
+#     avg, max_val, min_val = analize_list(data)
+#     print(f"{name}:")
+#     print(f"Średnia: {avg:.2f}")
+#     print(f"Max: {max_val}")
+#     print(f"Min: {min_val}\n")
 
+for name, data in lists_to_analyze:
+    plt.hist(data, bins=20)
+    plt.title(f" {plik}: {name}")
+    plt.show()
 

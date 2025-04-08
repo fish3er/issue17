@@ -1,25 +1,15 @@
 import os
-
-from matplotlib import pyplot as plt
 from scapy.all import rdpcap
 from scapy.layers.inet import TCP, UDP
 from scapy.layers.dns import DNS
 from scapy.layers.ntp import NTP
 from scapy.layers.tls.all import TLS, SSLv2
 from collections import defaultdict
-
-def analize_list(data):
-    if len(data) != 0:
-        avg = sum(data) / len(data)
-    else:
-        avg = 0
-        data = [0, 0]
-    return avg, max(data), min(data)
+import matplotlib.pyplot as plt
 
 # Ścieżka do folderu z plikami pcap
 folder_path = "NonVPN-PCAPs-01"
 
-# Przejście przez każdy plik w folderze
 for filename in os.listdir(folder_path):
     if filename.endswith(".pcap") or filename.endswith(".pcapng"):
         file_path = os.path.join(folder_path, filename)
@@ -95,20 +85,7 @@ for filename in os.listdir(folder_path):
             ("TLS VERSION", all_ttl_version)
         ]
 
-        # print(f"\n=== Analiza pliku {filename} ===")
-        # print("\n=== Zliczanie warstw ===")
-        # for layer, count in layer_counts.items():
-        #     print(f"  {layer}: {count} pakietów")
 
-        # print("\n=== Pola ===")
-        # for name, data in lists_to_analyze:
-        #     if not data:
-        #         continue
-        #     avg, max_val, min_val = analize_list(data)
-        #     print(f"{name}:")
-        #     print(f"  Średnia: {avg:.2f}")
-        #     print(f"  Max: {max_val}")
-        #     print(f"  Min: {min_val}\n")
         for name, data in lists_to_analyze:
             plt.hist(data, bins=20)
             plt.title(f" {filename}: {name}")

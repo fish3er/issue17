@@ -1,3 +1,7 @@
 W main.py jest cały program, wystarczy dać nazwę foldera i policzy wartosci średnie, min, max.
 Program działa jakieś 7 miunut ale pomijajac sotrzeżenia odnoście kodowania TSL i SSL to działa tak jak ma działać.
 Reszta programów była używana do testowania nowych fukcji.
+
+Plik hostogram wyrysowuje poprsotu wykresy dla WSZYSTKICH danych/analizowanych pól.
+
+UWAGA: Kod bradzo nieoptymalny, ale działa.
