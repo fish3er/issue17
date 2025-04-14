@@ -19,7 +19,7 @@ tfrecord_file = "packets_data.tfrecords"
 with tf.io.TFRecordWriter(tfrecord_file) as writer:
     for packet in packets:
         extracted_info = extract_packets_info(packet)
-        print(extracted_info)
+        # print(extracted_info)
         if extracted_info:
             features = {
                 key: convert_int64(value)
@@ -28,4 +28,4 @@ with tf.io.TFRecordWriter(tfrecord_file) as writer:
             example = tf.train.Example(features=tf.train.Features(feature=features))
             writer.write(example.SerializeToString())
 
-# print("Zapisano dane do:", tfrecord_file)
+print("Zapisano dane do:", tfrecord_file)
