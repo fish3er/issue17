@@ -5,3 +5,6 @@ Reszta programów była używana do testowania nowych fukcji.
 Plik hostogram wyrysowuje poprsotu wykresy dla WSZYSTKICH danych/analizowanych pól.
 
 UWAGA: Kod bradzo nieoptymalny, ale działa.
+
+W pliku toTFrecords jest zrobione przepisywanie pluków pcap do tfrecords. Brakuje testów tego czy faktyczenie przepisywanie jest zrobione dobrze,
+czy nie ma strat danych. Todo: testowanie tego pliku
