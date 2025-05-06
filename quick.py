@@ -6,7 +6,7 @@ from scapy.layers.tls.all import TLS, SSLv2
 from collections import defaultdict
 
 # Wczytanie pakietów z pliku pcap
-packets = rdpcap("NonVPN-PCAPs-01/facebook_audio2b.pcapng")
+packets = rdpcap("NonVPN-PCAPs-01/aim_chat_3a.pcap")
 
 layer_counts = defaultdict(int)
 
